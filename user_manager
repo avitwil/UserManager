@@ -1,0 +1,19 @@
+#!/bin/bash
+
+git clone https://github.com/avitwil/UserManager/
+
+echo " installing User Manager command by Avi Twil "
+
+sudo chmod 700 ./UserManager/userman
+sudo chmod 444 ./UserManager/userman.help
+
+cd UserManager
+
+sudo cp -t /usr/bin userman userman.help
+
+sudo rm -r ../UserManager 
+sleep 3
+cat /usr/bin/userman.help
+echo " "
+echo " Installation Complete "
+echo " Enjoy "
