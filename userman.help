@@ -1,0 +1,32 @@
+
+userman -- User mannager command 
+used to : create new user , set up the default shell for a user , 
+create new user and add him to existing group or to a new one ,
+add an existing user to existing group or to a new one 
+
+
+
+options:
+    
+    -u  : create a new user
+
+    -g  : create a new goup
+
+    -s  : set the default shell for a user . must be used with -u  or  -U option
+
+    -U  : refer to an existing user ( if you want to make changes )
+    
+    -G  : refer to an existing Group ( if you want to add a user )
+
+    --help    refer to this page right now ( i dont know how to create a manual yet )
+
+
+   !!!!!!  OPTIONS -u OR -U MUST BE USED !!!!!
+    
+
+
+   made by Avi Twil 
+
+  Enjoy
+
+
