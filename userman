@@ -24,7 +24,7 @@ do
             shift 2
             ;;
      --help)
-            cat ./userman.help
+            cat /use/bin/userman.help
             shift 2
             exit 1
             ;;
