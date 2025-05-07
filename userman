@@ -40,12 +40,12 @@ done
 if  [[ -n $NEW_USER && -n $NEW_SHELL && -n $NEW_GROUP ]] then
       addgroup $NEW_GROUP
       adduser $NEW_USER
-      usermod -s /usr/bin/$NEW_SHELL $NEW_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
       usermod -aG $NEW_GROUP $NEW_USER
 
 elif  [[ -n $NEW_USER && -n $NEW_SHELL ]] then
       adduser $NEW_USER
-      usermod -s /usr/bin/$NEW_SHELL $NEW_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
 
 elif  [[ -n $NEW_USER && -n $NEW_GROUP ]] then
       addgroup $NEW_GROUP
@@ -58,18 +58,18 @@ elif  [[ -n $NEW_USER && -n $OLD_GROUP ]] then
 
 elif  [[ -n $NEW_USER && -n $NEW_SHELL && -n $OLD_GROUP ]] then
       adduser $NEW_USER
-      usermod -s /usr/bin/$NEW_SHELL $NEW_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
       usermod -aG $OLD_GROUP $NEW_USER
 
 elif  [[ -n $NEW_USER ]] then
       adduser $NEW_USER
 
 elif  [[ -n $OLD_USER && -n $OLD_GROUP && -n $NEW_SHELL ]] then
-      usermod -s /usr/bin/$NEW_SHELL $OLS_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $OLS_USER
       usermod -aG $OLD_GROUP $OLD_USER
 
 elif  [[ -n $OLD_USER && -n $NEW_SHELL ]] then
-      usermod -s /usr/bin/$NEW_SHELL $OLS_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $OLS_USER
 
 elif  [[ -n $OLD_USER && -n $OLD_GROUP ]] then
       usermod -aG $OLD_GROUP $OLD_USER
