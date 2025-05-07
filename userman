@@ -65,11 +65,11 @@ elif  [[ -n $NEW_USER ]] then
       adduser $NEW_USER
 
 elif  [[ -n $OLD_USER && -n $OLD_GROUP && -n $NEW_SHELL ]] then
-      usermod -s /usr/bin/"$NEW_SHELL" $OLS_USER
+      usermod -s /usr/bin/$NEW_SHELL $OLD_USER
       usermod -aG $OLD_GROUP $OLD_USER
 
 elif  [[ -n $OLD_USER && -n $NEW_SHELL ]] then
-      usermod -s /usr/bin/"$NEW_SHELL" $OLS_USER
+      usermod -s /usr/bin/$NEW_SHELL $OLD_USER
 
 elif  [[ -n $OLD_USER && -n $OLD_GROUP ]] then
       usermod -aG $OLD_GROUP $OLD_USER
