@@ -80,3 +80,4 @@ elif  [[ -n $OLD_USER && -n $NEW_GROUP ]] then
 else
       echo "no changes has been done"
 fi
+update-passwd
