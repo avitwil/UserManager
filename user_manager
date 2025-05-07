@@ -4,7 +4,7 @@ git clone https://github.com/avitwil/UserManager/
 
 echo " installing User Manager command by Avi Twil "
 
-sudo chmod 700 ./UserManager/userman
+sudo chmod 777 ./UserManager/userman
 sudo chmod 444 ./UserManager/userman.help
 
 cd UserManager
