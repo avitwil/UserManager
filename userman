@@ -76,7 +76,7 @@ if  [[ -n $NEW_USER && -n $NEW_SHELL && -n $NEW_GROUP ]] then
 elif  [[ -n $NEW_USER && -n $NEW_SHELL ]] then
       adduser $NEW_USER
       usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
- echo "--------------------------------------------------------"
+      echo "--------------------------------------------------------"
       echo "$NEW_USER in /etc/passwd file"
       echo "--------------------------------------------------------"
       cat /etc/passwd | grep $NEW_USER
@@ -88,7 +88,7 @@ elif  [[ -n $NEW_USER && -n $NEW_GROUP ]] then
       addgroup $NEW_GROUP
       adduser $NEW_USER
       usermod -aG $NEW_GROUP $NEW_USER
- echo "--------------------------------------------------------"
+      echo "--------------------------------------------------------"
       echo "$NEW_USER in /etc/passwd file"
       echo "--------------------------------------------------------"
       cat /etc/passwd | grep $NEW_USER
@@ -105,7 +105,7 @@ elif  [[ -n $NEW_USER && -n $NEW_GROUP ]] then
 elif  [[ -n $NEW_USER && -n $OLD_GROUP ]] then
       adduser $NEW_USER
       usermod -aG $OLD_GROUP $NEW_USER
- echo "--------------------------------------------------------"
+      echo "--------------------------------------------------------"
       echo "$NEW_USER in /etc/passwd file"
       echo "--------------------------------------------------------"
       cat /etc/passwd | grep $NEW_USER
@@ -123,7 +123,7 @@ elif  [[ -n $NEW_USER && -n $NEW_SHELL && -n $OLD_GROUP ]] then
       adduser $NEW_USER
       usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
       usermod -aG $OLD_GROUP $NEW_USER
- echo "--------------------------------------------------------"
+      echo "--------------------------------------------------------"
       echo "$NEW_USER in /etc/passwd file"
       echo "--------------------------------------------------------"
       cat /etc/passwd | grep $NEW_USER
