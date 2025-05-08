@@ -23,6 +23,11 @@ do
             export OLD_USER="$2"
             shift 2
             ;;
+
+     -Ud)
+            export OLD_USER_DEL="$2"
+            shift 2
+            ;;
      --help)
             cat /usr/bin/userman.help
             shift 2
@@ -36,6 +41,16 @@ do
     esac
 done
 
+if  [[ -n $OLD_USER_DEL ]] then
+    read -p "are you sure you want to delete $OLD_USER_DEL and all his files [y/n]: " DELYN
+    if [[ $DELYN = "y" ]] then
+       userdel $OLD_USER_DEL
+       rm -r /home/$OLD_USER_DEL
+     echo"User $OLD_USER_DEL and all his files has been deleted" 
+     exit 1
+     else
+     exit 1
+fi
 
 if  [[ -n $NEW_USER && -n $NEW_SHELL && -n $NEW_GROUP ]] then
       addgroup $NEW_GROUP
