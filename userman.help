@@ -18,6 +18,8 @@ options:
     
     -G  : refer to an existing Group ( if you want to add a user )
 
+    -Ud  : refer to an existing user which you want to delete and all his files (/home/user_name)
+
     --help    refer to this page right now ( i dont know how to create a manual yet )
 
 
