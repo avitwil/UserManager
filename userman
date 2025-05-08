@@ -50,6 +50,7 @@ if  [[ -n $OLD_USER_DEL ]] then
      exit 1
      else
      exit 1
+     fi
 fi
 
 if  [[ -n $NEW_USER && -n $NEW_SHELL && -n $NEW_GROUP ]] then
