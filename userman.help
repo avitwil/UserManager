@@ -1,5 +1,5 @@
 
-userman --> User mannager command used to : 
+userman --> User mannager command 
 userman -u [username]  ---   create new user  
 userman -u/U [username] -s [shell(zsh/bash)] ---   set up the default shell for a user  
 userman -u [username] -g/G [groupname] ---   create new user and add him to existing group or to a new one 
@@ -12,13 +12,13 @@ options:
     
     -u  : create a new user
 
-    -g  : create a new goup
+    -g  : create a new goup and add the user in to it
 
     -s  : set the default shell for a user . must be used with -u  or  -U option
 
     -U  : refer to an existing user ( if you want to make changes )
     
-    -G  : refer to an existing Group ( if you want to add a user )
+    -G  : refer to an existing Group which the user will be added to
 
     -Ud  : refer to an existing user which you want to delete and all his files (/home/user_name)
 
