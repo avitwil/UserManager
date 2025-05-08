@@ -1,0 +1,200 @@
+#!/bin/bash
+
+while [ $# -gt 0 ]
+do
+ case "$1" in
+     -s)
+            export NEW_SHELL="$2"
+            shift 2
+            ;;
+     -g)
+            export NEW_GROUP="$2"
+            shift 2
+            ;;
+     -u)
+            export NEW_USER="$2"
+            shift 2
+            ;;
+     -G)
+            export OLD_GROUP="$2"
+            shift 2
+            ;;
+     -U)
+            export OLD_USER="$2"
+            shift 2
+            ;;
+
+     -Ud)
+            export OLD_USER_DEL="$2"
+            shift 2
+            ;;
+     --help)
+            cat /usr/bin/userman.help
+            shift 2
+            exit 1
+            ;;
+
+    *)
+    echo  "Unrecognized option: $1"
+    echo  "type --help for more info"
+    usage 1
+    esac
+done
+
+if  [[ -n $OLD_USER_DEL ]] then
+    read -p "are you sure you want to delete $OLD_USER_DEL and all his files [y/n]: " DELYN
+    if [[ $DELYN = "y" ]] then
+       userdel $OLD_USER_DEL
+       rm -r /home/$OLD_USER_DEL
+     echo "User $OLD_USER_DEL and all his files has been deleted" 
+     exit 1
+     else
+     exit 1
+     fi
+fi
+
+if  [[ -n $NEW_USER && -n $NEW_SHELL && -n $NEW_GROUP ]] then
+      addgroup $NEW_GROUP
+      adduser $NEW_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
+      usermod -aG $NEW_GROUP 
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+      echo " "
+      echo " "
+      echo " "
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+
+elif  [[ -n $NEW_USER && -n $NEW_SHELL ]] then
+      adduser $NEW_USER
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+
+
+elif  [[ -n $NEW_USER && -n $NEW_GROUP ]] then
+      addgroup $NEW_GROUP
+      adduser $NEW_USER
+      usermod -aG $NEW_GROUP $NEW_USER
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+      echo " "
+      echo " "
+      echo " "
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+elif  [[ -n $NEW_USER && -n $OLD_GROUP ]] then
+      adduser $NEW_USER
+      update-passwd
+      usermod -aG $OLD_GROUP $NEW_USER
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+      echo " "
+      echo " "
+      echo " "
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+elif  [[ -n $NEW_USER && -n $NEW_SHELL && -n $OLD_GROUP ]] then
+      adduser $NEW_USER
+      update-passwd
+      usermod -s /usr/bin/"$NEW_SHELL" $NEW_USER
+      usermod -aG $OLD_GROUP $NEW_USER
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+      echo " "
+      echo " "
+      echo " "
+      echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+elif  [[ -n $NEW_USER ]] then
+      adduser $NEW_USER
+ echo "--------------------------------------------------------"
+      echo "$NEW_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $NEW_USER
+      echo "--------------------------------------------------------"
+
+
+
+elif  [[ -n $OLD_USER && -n $OLD_GROUP && -n $NEW_SHELL ]] then
+      usermod -s /usr/bin/$NEW_SHELL $OLD_USER
+      usermod -aG $OLD_GROUP $OLD_USER 
+      echo "--------------------------------------------------------"
+      echo "$OLD_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $OLD_USER
+      echo "--------------------------------------------------------"
+      echo " "
+      echo " "
+      echo " "
+      echo "--------------------------------------------------------"
+      echo "$OLD_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $OLD_USER
+      echo "--------------------------------------------------------"
+
+     
+
+elif  [[ -n $OLD_USER && -n $NEW_SHELL ]] then
+      usermod -s /usr/bin/$NEW_SHELL $OLD_USER
+      echo "--------------------------------------------------------"
+      echo "$OLD_USER in /etc/passwd file"
+      echo "--------------------------------------------------------"
+      cat /etc/passwd | grep $OLD_USER
+      echo "--------------------------------------------------------"
+
+   
+
+elif  [[ -n $OLD_USER && -n $OLD_GROUP ]] then
+      usermod -aG $OLD_GROUP $OLD_USER
+      echo "--------------------------------------------------------"
+      echo "$OLD_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $OLD_USER
+      echo "--------------------------------------------------------"
+
+elif  [[ -n $OLD_USER && -n $NEW_GROUP ]] then
+      addgroup $NEW_GROUP
+      usermod -aG $NEW_GROUP $OLD_USER
+      echo "--------------------------------------------------------"
+      echo "$OLD_USER in /etc/group file"
+      echo "--------------------------------------------------------"
+      cat /etc/group | grep $OLD_USER
+      echo "--------------------------------------------------------"
+else
+      echo "no changes has been done"
+fi
+update-passwd
