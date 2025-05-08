@@ -46,7 +46,7 @@ if  [[ -n $OLD_USER_DEL ]] then
     if [[ $DELYN = "y" ]] then
        userdel $OLD_USER_DEL
        rm -r /home/$OLD_USER_DEL
-     echo"User $OLD_USER_DEL and all his files has been deleted" 
+     echo "User $OLD_USER_DEL and all his files has been deleted" 
      exit 1
      else
      exit 1
